@@ -1,10 +1,10 @@
 ext.deps = [
-    android_gradle_plugin      : 'com.android.tools.build:gradle:2.4.0-alpha6',
+    android_gradle_plugin : 'com.android.tools.build:gradle:3.2.1'
 ]
 
-ext.minSdkVersion = 14
-ext.compileSdkVersion = 25
-ext.buildToolsVersion = '25.0.0'
+ext.minSdkVersion = 21
+ext.compileSdkVersion = 28
+ext.buildToolsVersion = '28.0.3'
 
 task wrapper(type: Wrapper) {
   gradleVersion = '3.5'
@@ -14,11 +14,13 @@ allprojects {
   buildscript {
     repositories {
       jcenter()
-    }
+		google()
+	}
   }
 
   repositories {
     jcenter()
+	  google()
   }
 
   afterEvaluate { project ->
