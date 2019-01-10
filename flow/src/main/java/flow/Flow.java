@@ -22,9 +22,7 @@ import android.content.Intent;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -91,7 +89,7 @@ public final class Flow {
   }
 
   @NonNull
-  public static Installer configure(@NonNull Context baseContext, @NonNull AppCompatActivity activity) {
+  public static Installer configure(@NonNull Context baseContext, @NonNull Activity activity) {
     return new Installer(baseContext, activity);
   }
 
@@ -107,7 +105,7 @@ public final class Flow {
    * @return true if the Intent contains a History and it was handled.
    */
   @CheckResult public static boolean onNewIntent(@NonNull Intent intent,
-      @NonNull AppCompatActivity activity) {
+      @NonNull Activity activity) {
     //noinspection ConstantConditions
     checkArgument(intent != null, "intent may not be null");
     if (intent.hasExtra(InternalLifecycleIntegration.INTENT_KEY)) {

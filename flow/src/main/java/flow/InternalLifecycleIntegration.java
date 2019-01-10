@@ -18,13 +18,12 @@ package flow;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,11 +40,11 @@ public final class InternalLifecycleIntegration extends Fragment {
       InternalLifecycleIntegration.class.getSimpleName() + "_state";
   static final String INTENT_KEY = InternalLifecycleIntegration.class.getSimpleName() + "_history";
 
-  static @Nullable InternalLifecycleIntegration find(AppCompatActivity activity) {
-    return (InternalLifecycleIntegration) activity.getSupportFragmentManager().findFragmentByTag(TAG);
+  static @Nullable InternalLifecycleIntegration find(Activity activity) {
+    return (InternalLifecycleIntegration) activity.getFragmentManager().findFragmentByTag(TAG);
   }
 
-  static @NonNull InternalLifecycleIntegration require(AppCompatActivity activity) {
+  static @NonNull InternalLifecycleIntegration require(Activity activity) {
     Fragment fragmentByTag = find(activity);
     if (fragmentByTag == null) {
       throw new IllegalStateException("Flow services are not yet available. Do not make this call "
@@ -54,7 +53,7 @@ public final class InternalLifecycleIntegration extends Fragment {
     return (InternalLifecycleIntegration) fragmentByTag;
   }
 
-  static void install(final Application app, final AppCompatActivity activity,
+  static void install(final Application app, final Activity activity,
       @Nullable final KeyParceler parceler, final History defaultHistory,
       final Dispatcher dispatcher, final KeyManager keyManager) {
     app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
@@ -74,7 +73,7 @@ public final class InternalLifecycleIntegration extends Fragment {
           fragment.dispatcher = dispatcher;
           fragment.intent = a.getIntent();
           if (newFragment) {
-            activity.getSupportFragmentManager() //
+            activity.getFragmentManager() //
                 .beginTransaction() //
                 .add(fragment, TAG) //
                 .commit();
