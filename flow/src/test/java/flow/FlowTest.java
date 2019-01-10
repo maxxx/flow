@@ -80,7 +80,6 @@ public class FlowTest {
       callback = null;
       traversal = null;
       oldCallback.onTraversalCompleted();
-      ;
     }
 
     void assertIdle() {

@@ -142,7 +142,7 @@ public final class History implements Iterable<Object> {
       return history.isEmpty() ? null : history.get(history.size() - 1);
     }
 
-    @NonNull public boolean isEmpty() {
+    public boolean isEmpty() {
       return history.isEmpty();
     }
 
@@ -178,7 +178,7 @@ public final class History implements Iterable<Object> {
     @NonNull public Builder pop(int count) {
       final int size = history.size();
       checkArgument(count <= size,
-          String.format((Locale) null, "Cannot pop %d elements, history only has %d", count, size));
+          String.format(Locale.getDefault(), "Cannot pop %d elements, history only has %d", count, size));
       while (count-- > 0) {
         pop();
       }
